@@ -1,0 +1,6 @@
+github.com/go-ng/container v0.0.0-20220615121757-4740bf4bbc52 h1:bE9fTM7iGaaQ/qr9ZjMLJCi9F9ViJmqmZPeLkRRO+yc=
+github.com/go-ng/container v0.0.0-20220615121757-4740bf4bbc52/go.mod h1:UXfjBOEBFdN04gvAaq10RovV1tC22EskyYU4eXwHYXM=
+github.com/go-ng/slices v0.0.0-20220616195238-b8d239c57d65 h1:Z0bSxwn4xHsF3+MmGqMvKYtMAFqsSMmW04/zpc4k1sk=
+github.com/go-ng/slices v0.0.0-20220616195238-b8d239c57d65/go.mod h1:oRD4LxXsmqAI0X6Lj1vKWymfNKcCLZH5b18qyPZOTv4=
+github.com/go-ng/sort v0.0.0-20220616185258-b473d9578cb3 h1:16hG+h09gxoSrOSaZNGPhcybHLJmOO837xo9xnUJn80=
+github.com/go-ng/sort v0.0.0-20220616185258-b473d9578cb3/go.mod h1:0rs9/o25qOJ3DJyUZJMZvSzCIoENuBJ2WM08nLg/xOE=
