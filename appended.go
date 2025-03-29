@@ -16,7 +16,7 @@ type Interface[E any] sort.Interface[E]
 // Appended sort a slice in assumption that the beginning of the slice is
 // already sorted, and only tailLength new unsorted elements are added
 // to the end of the slice. The function contains an optimization for
-// a case where tailLenght is low and it is possible to resort the slice
+// a case where tailLength is low and it is possible to resort the slice
 // faster than just through a full resorting.
 //
 // For example if there is a slice of length 65536 with only 512 unsorted
@@ -40,7 +40,7 @@ func Appended[E any, S Interface[E]](s S, tailLength uint) {
 
 	if !shouldUseAppended(uint(len(s)), tailLength) {
 		if tailLength > uint(len(s)) {
-			panic(fmt.Sprintf("tailLength (%d) cannot be greater than the lenght of the provided slice (%d)", tailLength, len(s)))
+			panic(fmt.Sprintf("tailLength (%d) cannot be greater than the length of the provided slice (%d)", tailLength, len(s)))
 		}
 
 		sort.Sort(s)
@@ -54,7 +54,7 @@ func Appended[E any, S Interface[E]](s S, tailLength uint) {
 // * Much faster.
 // * Requires a buffer.
 //
-// The buffer lenght should be exactly the same as the lenght
+// The buffer length should be exactly the same as the length
 // of the unsorted tail.
 //
 // For example if there is a slice of length 65536 with only 512 unsorted
@@ -72,7 +72,7 @@ func AppendedWithBuf[E any, S Interface[E]](s S, buf []E) {
 
 	if !shouldUseAppendedWithBuf(uint(len(s)), tailLength) {
 		if tailLength > uint(len(s)) {
-			panic(fmt.Sprintf("tailLength (%d) cannot be greater than the lenght of the provided slice (%d)", tailLength, len(s)))
+			panic(fmt.Sprintf("tailLength (%d) cannot be greater than the length of the provided slice (%d)", tailLength, len(s)))
 		}
 
 		sort.Sort(s)
@@ -187,9 +187,9 @@ func groupInsertAppendSortWithBuf[E any, S Interface[E]](s S, buf []E) {
 // shouldUseAppended returns true if Appended is a more optimal
 // sorter than Slice.
 //
-// * totalSize is the size of the slice to be sorted.
-// * tailSize is the size of the unsorted right part (while the left
-//   part is already sorted).
+//   - totalSize is the size of the slice to be sorted.
+//   - tailSize is the size of the unsorted right part (while the left
+//     part is already sorted).
 func shouldUseAppended(totalSize, tailSize uint) bool {
 	// 32: 8
 	// 64: 16
@@ -215,9 +215,9 @@ func shouldUseAppended(totalSize, tailSize uint) bool {
 // shouldUseAppendedWithBuf returns true if AppendedWithBuf is a more optimal
 // sorter than Slice.
 //
-// * totalSize is the size of the slice to be sorted.
-// * tailSize is the size of the unsorted right part (while the left
-//   part is already sorted).
+//   - totalSize is the size of the slice to be sorted.
+//   - tailSize is the size of the unsorted right part (while the left
+//     part is already sorted).
 func shouldUseAppendedWithBuf(totalSize, tailSize uint) bool {
 	switch {
 	case totalSize < 10:

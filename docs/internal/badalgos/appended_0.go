@@ -14,7 +14,7 @@ func heapAppendSort[E any, S Interface[E]](s S, tailLength uint) {
 	// Strategy:
 	//
 	// Basically this is a heap sort, which starts not from scratch, but
-	// from a state where some elemnts are already pulled from the heap.
+	// from a state where some elements are already pulled from the heap.
 	//
 	// But using of heap is a bit slow, so we combine this idea with
 	// splitting the right part to two areas: the heap area and a sorted area.
@@ -122,9 +122,9 @@ func heapAppendSort[E any, S Interface[E]](s S, tailLength uint) {
 // shouldUseAppended returns true if Appended is a more optimal
 // sorter than Slice.
 //
-// * totalSize is the size of the slice to be sorted.
-// * tailSize is the size of the unsorted right part (while the left
-//   part is already sorted).
+//   - totalSize is the size of the slice to be sorted.
+//   - tailSize is the size of the unsorted right part (while the left
+//     part is already sorted).
 func shouldUseAppended(totalSize, tailSize uint) bool {
 	// TODO: improve this
 	switch {

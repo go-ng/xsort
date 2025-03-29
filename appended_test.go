@@ -26,31 +26,31 @@ func intsEqual(a, b []int) bool {
 	return true
 }
 
-func prepareTestCase(initial []byte, tailLenght uint) ([]int, []string, []string, string) {
-	splitIdx := len(initial) - int(tailLenght)
+func prepareTestCase(initial []byte, tailLength uint) ([]int, []string, []string, string) {
+	splitIdx := len(initial) - int(tailLength)
 	stdsort.Slice(initial[:splitIdx], func(i, j int) bool {
 		return initial[i] < initial[j]
 	})
 	var leftStrs, rightStrs []string
-	for _, v := range initial[:len(initial)-int(tailLenght)] {
+	for _, v := range initial[:len(initial)-int(tailLength)] {
 		leftStrs = append(leftStrs, fmt.Sprintf("%d", v))
 	}
-	for _, v := range initial[len(initial)-int(tailLenght):] {
+	for _, v := range initial[len(initial)-int(tailLength):] {
 		rightStrs = append(rightStrs, fmt.Sprintf("%d", v))
 	}
 	slice := make([]int, len(initial))
 	for idx, v := range initial {
 		slice[idx] = int(v)
 	}
-	return slice, leftStrs, rightStrs, fmt.Sprintf("%s | %s (tailLength: %d)", strings.Join(leftStrs, " "), strings.Join(rightStrs, " "), tailLenght)
+	return slice, leftStrs, rightStrs, fmt.Sprintf("%s | %s (tailLength: %d)", strings.Join(leftStrs, " "), strings.Join(rightStrs, " "), tailLength)
 }
 
-func testAppended(t *testing.T, initial []byte, tailLenght uint) {
-	s, leftStrs, rightStrs, testName := prepareTestCase(initial, tailLenght)
+func testAppended(t *testing.T, initial []byte, tailLength uint) {
+	s, leftStrs, rightStrs, testName := prepareTestCase(initial, tailLength)
 	c := make([]int, len(s))
 	copy(c, s)
 	t.Run(testName, func(t *testing.T) {
-		Appended(stdsort.IntSlice(s), uint(tailLenght))
+		Appended(stdsort.IntSlice(s), uint(tailLength))
 		stdsort.Slice(c, func(i, j int) bool {
 			return c[i] < c[j]
 		})
@@ -67,17 +67,17 @@ func TestAppended(t *testing.T) {
 
 func FuzzAppended(f *testing.F) {
 	f.Fuzz(func(t *testing.T, initial, _ []byte) {
-		tailLenght := uint(rand.Intn(len(initial) + 1))
-		testAppended(t, initial, uint(tailLenght))
+		tailLength := uint(rand.Intn(len(initial) + 1))
+		testAppended(t, initial, uint(tailLength))
 	})
 }
 
-func testAppended2(t *testing.T, initial []byte, tailLenght uint) {
-	s, leftStrs, rightStrs, testName := prepareTestCase(initial, tailLenght)
+func testAppended2(t *testing.T, initial []byte, tailLength uint) {
+	s, leftStrs, rightStrs, testName := prepareTestCase(initial, tailLength)
 	c := make([]int, len(s))
 	copy(c, s)
 	t.Run(testName, func(t *testing.T) {
-		groupInsertAppendSort(stdsort.IntSlice(s), tailLenght)
+		groupInsertAppendSort(stdsort.IntSlice(s), tailLength)
 		stdsort.Slice(c, func(i, j int) bool {
 			return c[i] < c[j]
 		})
@@ -96,17 +96,17 @@ func TestAppended2(t *testing.T) {
 
 func FuzzAppended2(f *testing.F) {
 	f.Fuzz(func(t *testing.T, initial, _ []byte) {
-		tailLenght := uint(rand.Intn(len(initial) + 1))
-		testAppended2(t, initial, uint(tailLenght))
+		tailLength := uint(rand.Intn(len(initial) + 1))
+		testAppended2(t, initial, uint(tailLength))
 	})
 }
 
-func testAppended3(t *testing.T, initial []byte, tailLenght uint) {
-	s, leftStrs, rightStrs, testName := prepareTestCase(initial, tailLenght)
+func testAppended3(t *testing.T, initial []byte, tailLength uint) {
+	s, leftStrs, rightStrs, testName := prepareTestCase(initial, tailLength)
 	c := make([]int, len(s))
 	copy(c, s)
 	t.Run(testName, func(t *testing.T) {
-		groupInsertAppendSortWithBuf(stdsort.IntSlice(s), make([]int, tailLenght))
+		groupInsertAppendSortWithBuf(stdsort.IntSlice(s), make([]int, tailLength))
 		stdsort.Slice(c, func(i, j int) bool {
 			return c[i] < c[j]
 		})
@@ -125,8 +125,8 @@ func TestAppended3(t *testing.T) {
 
 func FuzzAppended3(f *testing.F) {
 	f.Fuzz(func(t *testing.T, initial, _ []byte) {
-		tailLenght := uint(rand.Intn(len(initial) + 1))
-		testAppended3(t, initial, uint(tailLenght))
+		tailLength := uint(rand.Intn(len(initial) + 1))
+		testAppended3(t, initial, uint(tailLength))
 	})
 }
 
@@ -211,7 +211,7 @@ func BenchmarkAppended(b *testing.B) {
 						})
 					}
 				})
-				b.Run("sort.Sort", func(b *testing.B) {
+				b.Run("sort.Ints", func(b *testing.B) {
 					b.ReportAllocs()
 					b.ResetTimer()
 					for i := 0; i < b.N; i++ {
@@ -223,7 +223,7 @@ func BenchmarkAppended(b *testing.B) {
 							}
 							b.StartTimer()
 						}
-						stdsort.Sort(stdsort.IntSlice(cs[idx]))
+						stdsort.Ints(cs[idx])
 					}
 				})
 				b.Run("Appended", func(b *testing.B) {
