@@ -4,3 +4,5 @@ github.com/go-ng/slices v0.0.0-20220616195238-b8d239c57d65 h1:Z0bSxwn4xHsF3+MmGq
 github.com/go-ng/slices v0.0.0-20220616195238-b8d239c57d65/go.mod h1:oRD4LxXsmqAI0X6Lj1vKWymfNKcCLZH5b18qyPZOTv4=
 github.com/go-ng/sort v0.0.0-20220616185258-b473d9578cb3 h1:16hG+h09gxoSrOSaZNGPhcybHLJmOO837xo9xnUJn80=
 github.com/go-ng/sort v0.0.0-20220616185258-b473d9578cb3/go.mod h1:0rs9/o25qOJ3DJyUZJMZvSzCIoENuBJ2WM08nLg/xOE=
+golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 h1:nDVHiLt8aIbd/VzvPWN6kSOPE7+F/fNFDSXLVYkE/Iw=
+golang.org/x/exp v0.0.0-20250305212735-054e65f0b394/go.mod h1:sIifuuw/Yco/y6yb6+bDNfyeQ/MdPUy/hKEMYQV17cM=
